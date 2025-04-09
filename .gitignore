@@ -1,0 +1,29 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.env
+
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+
+# Uvicorn and other ASGI related
+*.sock
+
+# VSCode or other editor files
+.vscode/
+.idea/
+
+# System files
+.DS_Store
