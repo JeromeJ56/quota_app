@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9fafb;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .ask-btn {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 20px auto;
+            padding: 10px 20px;
+            background-color: #2563eb;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f3f4f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        li a {
+            text-decoration: none;
+            color: #111827;
+            font-weight: bold;
+        }
+
+        li span {
+            float: right;
+            color: #6b7280;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>All Questions</h2>
+        <a class="ask-btn" href="{% url 'ask_question' %}">+ Ask a Question</a>
+
+        <ul>
+            {% for q in questions %}
+            <li>
+                <a href="{% url 'question_detail' q.pk %}">{{ q.title }}</a>
+                <span>by {{ q.author.username }}</span>
+            </li>
+            {% empty %}
+            <li>No questions yet. Be the first to ask one!</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

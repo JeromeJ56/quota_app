@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            padding: 40px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .logout-button {
+            padding: 8px 16px;
+            background-color: #ef4444;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .question-list {
+            margin-top: 30px;
+        }
+
+        .question-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .question-list li {
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .ask-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #2563eb;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>Welcome, {{ username }}!</h2>
+        <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+    </div>
+
+    <a class="ask-button" href="{% url 'ask_question' %}">Ask a Question</a>
+
+    <div class="question-list">
+        <h3>All Questions</h3>
+        <ul>
+            {% for q in questions %}
+                <li>
+                    <a href="{% url 'question_detail' q.pk %}">{{ q.title }}</a>
+                    <br><small>By {{ q.author.username }}</small>
+                </li>
+            {% empty %}
+                <li>No questions yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

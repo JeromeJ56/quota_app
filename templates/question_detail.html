@@ -1,0 +1,33 @@
+<h2>{{ question.title }}</h2>
+<p>{{ question.body }}</p>
+<p>By: {{ question.author.username }}</p>
+
+<hr>
+<h3>Answers:</h3>
+<ul>
+    {% for answer in answers %}
+    <li>
+        <strong>{{ answer.author.username }}</strong>: {{ answer.body }}
+        <form method="post" action="{% url 'like_answer' answer.id %}">
+            {% csrf_token %}
+            <button type="submit">
+                👍 Like ({{ answer.total_likes }})
+                {% if user in answer.likes.all %}✔️{% endif %}
+            </button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+
+{% if user.is_authenticated %}
+<form method="post">
+    {% csrf_token %}
+    <textarea name="body" placeholder="Your answer"></textarea><br>
+    <button type="submit">Post Answer</button>
+</form>
+{% else %}
+<p><a href="{% url 'login' %}">Login</a> to answer</p>
+{% endif %}
+
+<a href="{% url 'question_list' %}">Back</a>
+
